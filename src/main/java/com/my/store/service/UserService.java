@@ -1,7 +1,11 @@
 package com.my.store.service;
 
-public interface UserService {
+import com.my.store.model.User;
 
-	long getCount();
+public interface UserService {
+	
+	User save(User user);
+
+	User get(String id) throws Exception;
 
 }

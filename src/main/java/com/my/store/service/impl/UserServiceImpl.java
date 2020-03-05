@@ -16,13 +16,13 @@ public class UserServiceImpl implements UserService {
 	
 	private final UserRepository userRepository;
 	
-	public void save(User user) {
-		userRepository.save(user);
+	public User save(User user) {
+		return userRepository.save(user);
 	}
 
 	@Override
-	public long getCount() {
-		return userRepository.count();
+	public User get(String id) throws Exception {
+		return userRepository.findById(Long.valueOf(id)).orElseThrow(() -> new Exception("No user"));
 	}
 
 }
