@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<!-- <%@ taglib uri="tag/captcha.tld" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="mt"%> -->
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Aroma Shop - Login</title>
+<link rel="icon" href="img/Fevicon.png" type="image/png">
+<link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="vendors/themify-icons/themify-icons.css">
+<link rel="stylesheet" href="vendors/linericon/style.css">
+<link rel="stylesheet"
+	href="vendors/owl-carousel/owl.theme.default.min.css">
+<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+<link rel="stylesheet" href="vendors/nice-select/nice-select.css">
+<link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+	<!--================ Start Header Menu Area =================-->
+	<header class="header_area">
+		<mt:header />
+	</header>
+	<!--================ End Header Menu Area =================-->
+
+	<!-- ================ start banner area ================= -->
+	<section class="blog-banner-area" id="category">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Register</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Register</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- ================ end banner area ================= -->
+
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section-margin">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="login_box_img">
+						<div class="hover">
+							<h4>Already have an account?</h4>
+							<p>There are advances being made in science and technology
+								everyday, and a good example of this is the</p>
+							<a class="button button-account" th:href="@{/login}">Login
+								Now</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 mx-auto">
+					<form class="card card-body" id="registration-form"
+						name="registration-form" action="/register" method="post"
+						enctype="multipart/form-data">
+						<h3 class="text-center mb-4">Sign-up</h3>
+						<fieldset>
+							<div class="col-md-12 form-group">
+								<input
+									th:class="${errors['userName'] != null ? 'form-control input-lg is-invalid' : 'form-control input-lg'}"
+									placeholder="User Name" name="userName" id="userName"
+									th:value="${bean.userName}" type="text">
+								<div class="invalid-feedback">
+									<span th:text=${errors[userName]} />
+								</div>
+
+								<p th:text=${repeatedUserName}></p>
+							</div>
+							<div class="col-md-12 form-group">
+								<input
+									th:class="${errors['fName'] != null ? 'form-control input-lg is-invalid' : 'form-control input-lg'}"
+									placeholder="First Name" name="fName" id="fName"
+									th:value="${bean.fName}" type="text">
+								<div class="invalid-feedback">
+									<span th:text=${errors[userName]} />
+								</div>
+							</div>
+							<div class="col-md-12 form-group">
+								<input
+									th:class="${errors['lName'] != null ? 'form-control input-lg is-invalid' : 'form-control input-lg'}"
+									placeholder="Last Name" name="lName" id="lName"
+									th:value="${bean.lName}" type="text">
+								<div class="invalid-feedback">
+									<span th:text=${errors[lName]} />
+								</div>
+							</div>
+							<div class="col-md-12 form-group">
+								<input
+									th:class="${errors['email'] != null ? 'form-control input-lg is-invalid' : 'form-control input-lg'}"
+									placeholder="E-mail Address" name="email" id="email"
+									th:value="${bean.email}" type="text">
+								<div class="invalid-feedback">
+									<span th:text=${errors[email]} />
+								</div>
+								<p>
+									<span th:text=${repeatedEmail} />
+								</p>
+							</div>
+							<div class="col-md-12 form-group">
+								<input
+									th:class="${errors['password'] != null ? 'form-control input-lg is-invalid' : 'form-control input-lg'}"
+									placeholder="Password" name="password" id="password"
+									type="password">
+								<div class="invalid-feedback">
+									<span th:text=${errors[password]} />
+								</div>
+							</div>
+							<div class="col-md-12 form-group">
+								<input
+									th:class="${errors['confirmPassword'] != null ? 'form-control input-lg is-invalid' : 'form-control input-lg'}"
+									placeholder="Confirm Password" name="confirmPassword"
+									id="confirmPassword" value="" type="password">
+								<div class="invalid-feedback">
+									<span th:text=${errors[confirmPassword]} />
+								</div>
+							</div>
+							<div class="col-md-12 form-group">
+								<div class="form-check">
+									<input class="form-check-input" name="news" id="news"
+										type="checkbox"> <label class="form-check-label"
+										for="terms-checkbox"> Subscribe to our news </label>
+									<div class="invalid-feedback"></div>
+								</div>
+							</div>
+
+							<input type="file" name="ava" />
+
+							<!--================ Captcha Tag =================-->
+							<s:captcha servlet="captcha" error="${incorrectCaptchaAnswer}"
+								publicKey="${captchaPublicKey}" />
+
+							<!--  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Me Up</button> -->
+							<button type="submit" value="Upload" id="submit-button"
+								class="button button-register w-100">Register</button>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+
+
+
+	<!--================ Start footer Area  =================-->
+	<footer>
+		<div class="footer-area footer-only">
+			<div class="container">
+				<div class="row section_gap">
+					<div class="col-lg-3 col-md-6 col-sm-6">
+						<div class="single-footer-widget tp_widgets ">
+							<h4 class="footer_title large_title">Our Mission</h4>
+							<p>So seed seed green that winged cattle in. Gathering thing
+								made fly you're no divided deep moved us lan Gathering thing us
+								land years living.</p>
+							<p>So seed seed green that winged cattle in. Gathering thing
+								made fly you're no divided deep moved</p>
+						</div>
+					</div>
+					<div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
+						<div class="single-footer-widget tp_widgets">
+							<h4 class="footer_title">Quick Links</h4>
+							<ul class="list">
+								<li><a href="#">Home</a></li>
+								<li><a href="#">Shop</a></li>
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">Product</a></li>
+								<li><a href="#">Brand</a></li>
+								<li><a href="#">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-6 col-sm-6">
+						<div class="single-footer-widget instafeed">
+							<h4 class="footer_title">Gallery</h4>
+							<ul class="list instafeed d-flex flex-wrap">
+								<li><img src="img/gallery/r1.jpg" alt=""></li>
+								<li><img src="img/gallery/r2.jpg" alt=""></li>
+								<li><img src="img/gallery/r3.jpg" alt=""></li>
+								<li><img src="img/gallery/r5.jpg" alt=""></li>
+								<li><img src="img/gallery/r7.jpg" alt=""></li>
+								<li><img src="img/gallery/r8.jpg" alt=""></li>
+							</ul>
+						</div>
+					</div>
+					<div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+						<div class="single-footer-widget tp_widgets">
+							<h4 class="footer_title">Contact Us</h4>
+							<div class="ml-40">
+								<p class="sm-head">
+									<span class="fa fa-location-arrow"></span> Head Office
+								</p>
+								<p>123, Main Street, Your City</p>
+
+								<p class="sm-head">
+									<span class="fa fa-phone"></span> Phone Number
+								</p>
+								<p>
+									+123 456 7890 <br> +123 456 7890
+								</p>
+
+								<p class="sm-head">
+									<span class="fa fa-envelope"></span> Email
+								</p>
+								<p>
+									free@infoexample.com <br> www.infoexample.com
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row d-flex">
+					<p class="col-lg-12 footer-text text-center">
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>
+							document.write(new Date().getFullYear());
+						</script>
+						All rights reserved | This template is made with <i
+							class="fa fa-heart" aria-hidden="true"></i> by <a
+							href="https://colorlib.com" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!--================ End footer Area  =================-->
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+		type="text/javascript"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+
+
+	<script src="vendors/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="vendors/skrollr.min.js"></script>
+	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="vendors/nice-select/jquery.nice-select.min.js"></script>
+	<script src="vendors/jquery.ajaxchimp.min.js"></script>
+	<script src="vendors/mail-script.js"></script>
+	<script src="js/main.js"></script>
+
+	<!--<script src="js/validationFormJs.js"></script> -->
+	<script src="js/validationFormJQuery.js"></script>
+
+</body>
+</html>
